@@ -11,10 +11,11 @@ const HomePage = () => {
   return (
     <>
       <Box className={styles.container}>
-        <Typography variant="body1">Halo {user?.email}, ini adalah halaman utama</Typography>
+        <Typography variant="body1">Hallo Selamat Datang {user?.email}!</Typography>
       </Box>
     </>
   );
 };
 
 export default HomePage;
+
