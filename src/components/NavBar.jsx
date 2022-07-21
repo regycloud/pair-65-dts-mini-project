@@ -1,8 +1,11 @@
 import React from "react";
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.css";
 import { keluarDariAplikasi } from "../authentication/firebase";
+import logo from "../assets/images/Logo.png";
+import { auth } from "../authentication/firebase"
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const NavBar = () => {
     const navigate = useNavigate();
@@ -10,14 +13,19 @@ const NavBar = () => {
         await keluarDariAplikasi();
         navigate("/login");
     };
+    const [user] = useAuthState(auth)
 
     return (
         <Box className={styles.grow}>
             <AppBar position="static">
-                <Toolbar>
-                    <Typography variant="h6" component="div" className={styles.grow}>
-                        Movies
-                    </Typography>
+                <Toolbar><Link to='/' style={{display: 'flex', textDecoration: 'none', color: 'white'}}>
+                    <img src={logo} width={40} style={{paddingRight: 20, paddingLeft: 30}} alt="home"/>
+                    <Typography variant="h5" sx={{paddingTop: 1, paddingRight: 2}}>Home</Typography>
+                   </Link>
+                    <Typography variant="h5" sx={{}}>Profile</Typography>
+                    <Typography variant="h6" className={styles.grow} sx={{textDecoration: 'none'}}>
+                   </Typography>
+                    <Typography>Hallo {user?.email}</Typography>                    
                     <Button color="inherit" onClick={buttonLogoutOnClickHandler}>
                         Log Out
                     </Button>

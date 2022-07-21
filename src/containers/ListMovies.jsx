@@ -1,34 +1,44 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import tmdb from '../apis/axios'
 import { Box, Typography } from '@mui/material';
-import CardMovie from '../components/CardMovie'
+import CardMovie from '../components/CardMovie';
 
 const ListMovies = () => {
     const [movies, setMovies] = useState([]);
-
+  
     useEffect(() => {
-        const fetchDataMovies = async () => {
-            try {
-                const response = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=a152302fef97e3c7c20de9d4503c0e14");
-                setMovies(response.data.results);
-            }
-            catch(err){
-                console.log(err)
-            }
-        };
-        fetchDataMovies();
-    }, [])
-
-    return(
-        <Box className='boxy'>
-            <Typography variant='h5'>
-                List Movies
-            </Typography>
-            {movies.map((movie) => {
-                return <CardMovie key={movie.id} movie={movie} />;
-            })}
-        </Box>
-    )
-}
+      const fetchDataMovies = async () => {
+        try {
+          const response = await tmdb.get(
+            "/movie/popular"
+          );
+          setMovies(response.data.results);
+        } catch(err) {
+          console.log(err);
+        }
+      };
+      fetchDataMovies();
+    }, []);
+  
+    return (
+      <Box sx={{ padding: "1em", border:2, background:"black"}}>  
+      <Typography variant='h4' sx={{color: 'whitesmoke'}}>Popular Movie List</Typography>
+        <Box
+          component="div"
+          sx={{
+            display: "grid",
+            gridTemplateColumns: "repeat(6, 1fr)",
+            marginBottom: "1em",
+            marginTop: '1em',
+            width: '100%'
+          }}
+        >
+          {movies.slice(0, movies.length - 2).map((movie) => {
+            return <CardMovie movie={movie} key={movie.id} />;
+          })}
+          </Box>
+      </Box>
+    );
+  };
 
 export default ListMovies

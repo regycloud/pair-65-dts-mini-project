@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Grid, Box, Button, TextField, Typography} from "@mui/material";
+import {Box, Button, TextField, Typography} from "@mui/material";
 import { Link } from "react-router-dom";
 import styles from "./LoginOrRegisterForm.module.css";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { auth, loginDenganEmailDanPassword, registerDenganEmailDanPassword } fro
 
 const LoginOrRegisterForm = ({ loginOrRegister }) => {
     const navigate = useNavigate();
-    const [user, isLoading, error] = useAuthState(auth)
+    const [user, isLoading] = useAuthState(auth)
 
     const [credential, setCredential] = useState({
         email: "",
@@ -30,14 +30,10 @@ const LoginOrRegisterForm = ({ loginOrRegister }) => {
     };
 
     const loginHandler = () => {
-        // console.log('Login');
-        // navigate("/");
         loginDenganEmailDanPassword(credential.email, credential.password);
     };
 
     const registerHandler = () => {
-        // console.log('Register');
-        // navigate("/register")
         registerDenganEmailDanPassword(credential.email, credential.password);
     };
 
@@ -63,24 +59,15 @@ const LoginOrRegisterForm = ({ loginOrRegister }) => {
     )
 
     return (
-        <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        style={{ minHeight: "95vh" }}
-        >
+        <Box sx={{width: '100', background: 'grey', height:'100vh'}}>
             <Box className={styles.boxy} component="form" noValidate>
-                <Typography variant="body1">
+                <Typography variant="h2" sx={{paddingBottom: '20vh', textAlign:'center'}}>
                     {loginOrRegister === "login" ? "Login Page" : "Register"}
                 </Typography>
 
                 <TextField
                     label="Email"
                     type="email"
-                    variant="outlined"
-                    size="small"
                     value={credential.email}
                     onChange={textFieldEmailOnChangeHandler}
                  />
@@ -88,8 +75,6 @@ const LoginOrRegisterForm = ({ loginOrRegister }) => {
                  <TextField
                     label="Password"
                     type="password"
-                    variant="outlined"
-                    size="small"
                     value={credential.password}
                     onChange={textFieldPasswordOnChangeHandler}
                 />
@@ -101,16 +86,16 @@ const LoginOrRegisterForm = ({ loginOrRegister }) => {
                 >{loginOrRegister === "login" ? "Login" : "Register Account"}
                     </Button>
                     {loginOrRegister === "login" ? (
-                        <Link to="/register">
+                        <Link to="/register" style={{textDecoration: 'none', color: 'white'}}>
                             <Typography>or do you want to register?</Typography>
                         </Link>
                         ): (
-                            <Link to="/login">
-                                <Typography>or do you want to login?</Typography>
+                            <Link to="/login" style={{textDecoration: 'none', color: 'white'}}>
+                                <Typography variant="h3" sx={{color: 'white'}}>or do you want to login?</Typography>
                             </Link>
                         )}
             </Box>
-        </Grid>
+        </Box>
     )
 };
 

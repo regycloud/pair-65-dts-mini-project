@@ -1,19 +1,18 @@
 import React from "react";
 
-import { Box, Typography } from "@mui/material";
-
-import styles from "./HomePage.module.css";
-import { auth } from "../authentication/firebase"
-import { useAuthState } from "react-firebase-hooks/auth";
 
 const HomePage = () => {
-    const [user] = useAuthState(auth)
   return (
-    <>
-      <Box className={styles.container}>
-        <Typography variant="body1">Hallo Selamat Datang {user?.email}!</Typography>
-      </Box>
-    </>
+    <div style={{border:3}}>
+    <iframe
+      width="100%"
+      height="480"
+      src={`https://www.youtube.com/embed/O4lE4B6_4kc`}
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      title="video"
+    />
+  </div>
   );
 };
 
