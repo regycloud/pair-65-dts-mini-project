@@ -87,11 +87,11 @@ const LoginOrRegisterForm = ({ loginOrRegister }) => {
                     </Button>
                     {loginOrRegister === "login" ? (
                         <Link to="/register" style={{textDecoration: 'none', color: 'white'}}>
-                            <Typography>or do you want to register?</Typography>
+                            <Typography variant="h5">or do you want to register? Click here</Typography>
                         </Link>
                         ): (
                             <Link to="/login" style={{textDecoration: 'none', color: 'white'}}>
-                                <Typography variant="h3" sx={{color: 'white'}}>or do you want to login?</Typography>
+                                <Typography variant="h5" sx={{color: 'white'}}>or do you want to login? Click here</Typography>
                             </Link>
                         )}
             </Box>
